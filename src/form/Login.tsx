@@ -1,3 +1,4 @@
+import { Button, Card, CardContent, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -20,6 +21,8 @@ const Login = () => {
         }
       );
 
+      console.log(username);
+      
       console.log(res);
       
       localStorage.setItem("token", res.data.token);
@@ -44,42 +47,96 @@ const Login = () => {
     }
   };
   return (
-    <div className="bg-[url('https://wallpapers.com/images/high/soil-and-soft-green-nature-zr50yf854y5f1c18.webp')] bg-cover bg-fixed bg-no-repeat h-screen w-full flex items-center justify-center">
-      <div className="bg-white/30 h-[80%] w-[30%] m-10 rounded-3xl flex flex-col items-center shadow-xl">
-          <h1 className="mt-10 mb-6 text-4xl font-bold">Login</h1>
-          <input
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-            type="text"
-            className="w-[75%] h-10 border-1 rounded-lg m-5 p-2.5 focus:border-blue-500 border-gray-400 bg-white shadow-xl focus:outline-none"
-            placeholder="Enter username"
-            required
-          />
-          <input
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            type="password"
-            className="w-[75%] h-10 border-1 rounded-lg p-2.5 focus:border-blue-500 border-gray-400 bg-white mt-3 shadow-xl focus:outline-none"
-            placeholder="Enter password"
-            required
-          />
+    <div
+      className="min-h-screen w-full flex items-center justify-end
+                 bg-[url('./assets/paddy.jpg')] bg-cover bg-center bg-fixed"
+    >
 
-          <button
-            type="submit"
-            className="cursor-pointer w-[75%] h-10 bg-blue-700 text-white rounded-lg mt-20 hover:bg-blue-600"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
-          <span className="mt-10">
-            If you don't have an account please{" "}
-            <Link to="/register">Register</Link>
-          </span>
-        </div>
-        <div className="h-[80%] w-[50%] m-5"></div> 
+      {/* Login Card */}
+      <Card
+  sx={{
+    backgroundColor: "rgba(255, 255, 255, 0.3)", // semi-transparent
+    backdropFilter: "blur(2px)", // blur
+    height: "80%",
+    width: { xs: "90%", md: "30%" },
+    margin: 2,
+    borderRadius: "1.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+    minWidth:"400px",
+    minHeight:"400px",
+    marginRight:"100px"
+  }}
+>
+  <CardContent className="flex flex-col items-center w-full">
+    <Typography variant="h4" sx={{
+      marginBottom:"20px",
+      color:"#167A00",
+      fontWeight:"Bold"
+    }}>
+      Login
+    </Typography>
+
+    <TextField
+      fullWidth
+      label="Username"
+      variant="outlined"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      className="mb-5"
+      required
+      sx={{
+        marginBottom:"20px",
+        color:"#167A00"
+      }
+      }
+    />
+
+    <TextField
+      fullWidth
+      label="Password"
+      type="password"
+      variant="outlined"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className="mb-5"
+      sx={{
+        marginBottom:"20px",
+        color:"#167A00"
+      }}
+      required
+    />
+
+    <Button
+      fullWidth
+      variant="contained"
+      color="primary"
+      className="mt-10"
+      onClick={handleLogin}
+      sx={{
+        marginBottom: "20px",
+        background:"#167A00",
+        boxShadow:"20px"
+      }}
+    >
+      Login
+    </Button>
+
+    {/* Register Link */}
+    <Typography variant="body2" className="mt-6">
+      If you don't have an account, please{" "}
+      <Link to="/register" className="text-blue-700 underline">
+        Register
+      </Link>
+    </Typography>
+  </CardContent>
+</Card>
+
     </div>
+
   )
 }
 
