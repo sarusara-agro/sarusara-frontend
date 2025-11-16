@@ -8,11 +8,13 @@ export const theme = createTheme({
 
 
 export const themeInput = createTheme({
+  typography: {
+    fontFamily: "Poppins, Arial, sans-serif",
+  },
   components: {
     MuiTextField: {
       styleOverrides: {
         root: {
-          fontFamily: "Poppins, sans-serif", // set font here
           marginBottom:"10px",
           "& .MuiOutlinedInput-root": {
             color: "#125C00", // text color

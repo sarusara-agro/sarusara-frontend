@@ -1,10 +1,12 @@
-import { Button, Card, CardContent, FormControl, MenuItem, Select, TextField, ThemeProvider, Typography } from "@mui/material"
+import { Button, Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, ThemeProvider, Typography } from "@mui/material"
 import { useState } from "react"
-import { data, Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { themeInput } from "../theme"
 import axios from "axios"
+import toast from "react-hot-toast"
 
 const Signup = () => {
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name:"",
@@ -34,17 +36,20 @@ const Signup = () => {
 
       console.log(res.data);
       setFormData({
-    name:"",
-    email:"",
-    password:"",
-    address:"",
-    phoneNo:"",
-    role: "",
-  })
+        name:"",
+        email:"",
+        password:"",
+        address:"",
+        phoneNo:"",
+        role: "",
+      })
+
+  toast.success("User registered successfully");
+  navigate("/login");
       
     }catch(err){
       console.log(err);
-
+      toast.error("User cannot be registered " + err);
     }
   }
 
@@ -131,8 +136,12 @@ const Signup = () => {
     />
 
   <FormControl fullWidth>
+    <InputLabel id="role-label" sx={{
+      color:"#167A00"
+    }}>Role</InputLabel>
     <Select
-    label="sds"
+    labelId="role-label"
+    label="Role"
     onChange={(e) =>
       setFormData({ ...formData, role: e.target.value as string })
     }
@@ -183,7 +192,7 @@ const Signup = () => {
     {/* Register Link */}
     <Typography variant="body2" className="mt-6">
       If you already have an account, please{" "}
-      <Link to="/login" className="text-blue-700 underline">
+      <Link to="/login" className="text-blue-900 underline font-bold">
         login
       </Link>
     </Typography>
